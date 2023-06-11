@@ -129,7 +129,14 @@
 
                         for (var i = 0; i < input.length; i++) {
 
-                            if (CorrectAnswer[i] === UserInput[i]) {//글자와 위치가 모두 같은 경우
+                            if (input[i].value.length != 1) {
+                                return alert('한자리만 입력해주세요');
+                            }
+                            else if (!/[a-zA-Z]/.test(input[i].value)) {
+                                return alert("영어 문자를 입력하세요.");
+                            }
+
+                            else if (CorrectAnswer[i] === UserInput[i]) {//글자와 위치가 모두 같은 경우
                                 input[i].style.background = '#00FF2B';
                             }
                             else if (CorrectAnswer.includes(UserInput[i])) {//글자만 같은 경우
@@ -147,6 +154,8 @@
                             alert('정답!')
                             const Count = Number($Count.textContent);
                             $Count.textContent = Count + 1;
+                            location.reload();
+
                         }
 
                         else if (tryCount === 5) {
@@ -168,6 +177,7 @@
                         tryCountDisplay.textContent = `시도횟수: ${tryCount}`;//업데이트된 시도 횟수를 textContent에 할당
                         $SubmitButton.parentNode.insertBefore(tryCountDisplay, $SubmitButton.nextSibling);//제출 단추 옆에 배치
                         //제출 버튼 클릭 시 HTML 추가
+                        if(tryCount != 6) {
                         var template2 = `<center> <div>
                             <input class="input" >
                             <input class="input">
@@ -176,8 +186,7 @@
                             <input class="input">
                             </div> </center>`;
                         document.querySelector('body').insertAdjacentHTML('beforeend', template2)
-
-
+                        }
 
                         //문제점: class input의 다음 줄로 넘어가면 글자와 위치가 모두 맞아도 노란색으로 표시가 됨
                     });
@@ -254,6 +263,7 @@
                             alert('정답!')
                             const Count = Number($Count.textContent);
                             $Count.textContent = Count + 1;
+                            location.reload();
                         }
                         else if (tryCount === 5) {
                             alert('게임 종료!');
@@ -275,6 +285,7 @@
                         $SubmitButton.parentNode.insertBefore(tryCountDisplay, $SubmitButton.nextSibling);//제출 단추 옆에 배치
 
                         //제출 버튼 클릭 시 HTML 추가
+                        if(tryCount != 6) {
                         var template2 = `<center> <div>
                             <input class="input">
                             <input class="input">
@@ -283,6 +294,7 @@
                             <input class="input">
                             </div> </center>`;
                         document.querySelector('body').insertAdjacentHTML('beforeend', template2);
+                        }
                     })
             });
 
